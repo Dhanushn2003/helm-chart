@@ -1,0 +1,9 @@
+apiVersion: {{ .Values.config.apiVersion}}
+kind: {{ .Values.config.kind}}
+metadata:
+  name: {{ .Values.config.name}}
+  namespace: {{ .Values.config.namespace}}
+data:
+  MONGODB_URI: {{ .Values.deployment.env.value}}
+  PORT: {{ .Values.mongodb.spec.containerPort}}
+  MONGO_INITDB_DATABASE: {{ .Values.config.database}}

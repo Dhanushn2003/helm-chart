@@ -1,0 +1,62 @@
+# deployment
+apiVersion: apps/v1
+kind: Deployment
+Name: vegetable-order-app
+namespace: dhanush-ns
+spec:
+  replicas: 3
+deployment:
+  labels:
+    app: vegetable-order-app
+  container_name: vegetable-order
+  containerPort: 3000
+  image: 
+    name: dhanushn2003/vegetable-image
+    tag: d1.0.1
+  env:
+    name: MONGO_URL
+    value: "mongodb://mongodb-service:27017/vegetableDB"
+
+# service
+service: 
+  apiVersion: v1 
+  kind: Service 
+  name: vegetable-service
+  namespace: dhanush-ns
+  spec:
+    selector:
+      app: vegetable-order-app
+    type: LoadBalancer
+    ports:
+      port: 80
+      targetPort: 3000
+
+# mongodb-depoyment and sevice
+mongodb: 
+  apiVersion: apps/v1
+  kind: Deployment
+  name: mongodb-deploy 
+  namespace: dhanush-ns
+  spec: 
+    replicas: 1
+    labels:
+      app: mongodb
+    container_name: mongodb
+    image:
+      name: mongo 
+      tag: 6
+    containerPort: 27017
+  service: 
+    name: mongodb-service 
+    type: LoadBalancer
+
+#configmap
+config: 
+  apiVersion: v1
+  kind: ConfigMap
+  name: vegetable-order-config
+  namespace: dhanush-ns
+  database: "mydatabase"
+
+
+  
