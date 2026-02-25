@@ -1,5 +1,5 @@
-apiVersion: {{ .Values.mongodb.apiversion }}
-kind: {{ .Values.mongodb.kind }}
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: {{ .Values.mongodb.name }}
   namespace: {{ .Values.mongodb.namespace }}
@@ -15,19 +15,19 @@ spec:
     spec:
       containers:
       - name: {{ .Values.mongodb.spec.container_name }}
-        image: {{ .Values.mongodb.spec.image.name }}: {{ Values.mongodb.spec.image.tag }}
+        image: "{{ .Values.mongodb.spec.image.name }}:{{ .Values.mongodb.spec.image.tag }}"
         ports:
         - containerPort: {{ .Values.mongodb.spec.containerPort }}
         env:
         - name: {{ .Values.mongodb.spec.env.name }}
           valueFrom:
             configMapKeyRef:
-              name: {{ .Values.mongodb.spec.env.config.name }}
+              name: {{ .Values.config.name }}
               key: {{ .Values.mongodb.spec.env.name }}
         - name: {{ .Values.mongodb.spec.env.username }}
           valueFrom:
             configMapKeyRef:
-              name:  {{ .Values.mongodb.spec.env.config.name }}
+              name:  {{ .Values.config.name }}
               key: {{ .Values.mongodb.spec.env.username }}
         - name: {{ .Values.mongodb.spec.env.key.username }}
           valueFrom:

@@ -37,6 +37,8 @@ mongodb:
   kind: Deployment
   name: mongodb-deploy 
   namespace: dhanush-ns
+  username: admin
+  password: admin123
   spec: 
     replicas: 1
     labels:
@@ -68,12 +70,11 @@ config:
   database: "mydatabase"
 
 #SECRET
-
 secret:
-  kind: Secret
-  name: order-secret
+  name: mongodb-secret
   type: Opaque
   data:
-    EMAIL_USER: Y2hhZ2FudHl0ZWphMjUwMkBnbWFpbC5jb20=
-    EMAIL_PASS: eXhvcSBianVrIHJkbnQgYWx6cA==
-
+    EMAIL_USER: dhanush@gmail.com
+    EMAIL_PASS: dhanush@123
+app: 
+  port: 3000

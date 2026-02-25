@@ -1,5 +1,5 @@
-apiVersion: {{ .Values.service.apiversion }}
-kind: {{ .Values.service.kind }}
+apiVersion: v1
+kind: Service 
 metadata:
   name: {{ .Values.mongodb.service.name }}
   namespace: {{ .Values.service.namespace }}

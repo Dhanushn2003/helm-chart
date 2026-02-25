@@ -1,10 +1,11 @@
-apiVersion: {{ .Values.config.apiVersion }}
-kind: {{ .Values.config.kind }}
+apiVersion: v1
+kind: ConfigMap
 metadata:
   name: {{ .Values.config.name }}
   namespace: {{ .Values.config.namespace }}
 data:
-  MONGODB_URI: {{ .Values.deployment.env.value }}
-  SESSION_SECRET: {{ .Values.config.secret }}
-  PORT: {{ .Values.mongodb.spec.containerPort }}
-  MONGO_INITDB_DATABASE: {{ .Values.config.database }}
+  MONGO_URL: {{ .Values.deployment.env.value | quote }}
+  SESSION_SECRET: {{ .Values.config.secret | quote }}
+  PORT: {{ .Values.app.port | quote }}
+  MONGO_INITDB_DATABASE: {{ .Values.config.database | quote }}
+  MONGO_INITDB_ROOT_USERNAME: {{ .Values.mongodb.username | quote }}
