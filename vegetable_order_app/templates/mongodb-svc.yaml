@@ -1,12 +1,12 @@
-apiVersion: {{ .Values.service.apiversion}}
-kind: {{ .Values.service.kind}}
+apiVersion: {{ .Values.service.apiversion }}
+kind: {{ .Values.service.kind }}
 metadata:
-  name: {{ .Values.mongodb.service.name}}
-  namespace: {{ .Values.service.namespace}}
+  name: {{ .Values.mongodb.service.name }}
+  namespace: {{ .Values.service.namespace }}
 spec:
   selector:
-    app: {{ .Values.service.spec.selector.app}}
+    app: {{ .Values.service.spec.selector.app }}
   ports:
-  - port: {{ .Values.mongodb.spec.containerPort}}
-    targetPort: {{ .Values.mongodb.spec.containerPort}}
-  type: {{ .Values.mongodb.service.type}}
+  - port: {{ .Values.mongodb.spec.containerPort }}
+    targetPort: {{ .Values.mongodb.spec.containerPort }}
+  type: {{ .Values.mongodb.service.type }}

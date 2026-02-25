@@ -46,6 +46,14 @@ mongodb:
       name: mongo 
       tag: 6
     containerPort: 27017
+    env: 
+      name: MONGO_INITDB_DATABASE
+      username: MONGO_INITDB_ROOT_USERNAME
+      config: 
+        name: mongodb-config
+      key: 
+        name: mongodb-secret
+        username: MONGO_INITDB_ROOT_PASSWORD
   service: 
     name: mongodb-service 
     type: LoadBalancer
@@ -56,7 +64,16 @@ config:
   kind: ConfigMap
   name: vegetable-order-config
   namespace: dhanush-ns
+  secret: "1234"
   database: "mydatabase"
 
+#SECRET
 
-  
+secret:
+  kind: Secret
+  name: order-secret
+  type: Opaque
+  data:
+    EMAIL_USER: Y2hhZ2FudHl0ZWphMjUwMkBnbWFpbC5jb20=
+    EMAIL_PASS: eXhvcSBianVrIHJkbnQgYWx6cA==
+

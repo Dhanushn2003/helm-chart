@@ -1,23 +1,26 @@
-apiVersion: {{ .Values.apiversion}}
-kind: {{ .Values.kind}}
+apiVersion: {{ .Values.apiversion }}
+kind: {{ .Values.kind }}
 metadata:
   name: {{ .Values.Name }}
-  namespace: {{ .Values.Namespace}}
+  namespace: {{ .Values.Namespace }}
 spec:
-  replicas: {{ .Values.spec.replicas}}
+  replicas: {{ .Values.spec.replicas }}
   selector:
     matchLabels:
-      app: {{ .Values.deployment.labels,app}}
+      app: {{ .Values.deployment.labels,app }}
   template:
     metadata:
       labels:
-        app: {{ .Values.deployment.labels,app}}
+        app: {{ .Values.deployment.labels,app }}
     spec:
       containers:
-      - name: {{ .Values.deployment.container_name}}
-        image: {{ .Values.deployment.image.name}} : {{ .Values.deployment.image.tag}}
+      - name: {{ .Values.deployment.container_name }}
+        image: {{ .Values.deployment.image.name }} : {{ .Values.deployment.image.tag }}
         ports:
-        - containerPort: {{ .Values.deployment.containerPort}}
+        - containerPort: {{ .Values.deployment.containerPort }}
         env:
-        - name: {{ .Values.deployment.env.name}}
-          value: {{ .Values.deployment.env.value}}
+        - name: {{ .Values.deployment.env.name }}
+          valueFrom:
+            configMapKeyRef:
+              name: {{ .Values.config.name }}
+              key: {{ .Values.deployment.env.name }}
